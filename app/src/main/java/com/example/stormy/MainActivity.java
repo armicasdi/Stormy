@@ -3,8 +3,12 @@ package com.example.stormy;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -33,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         String forecastURl = "https://api.darksky.net/forecast/"
                 + apiKey +"/"+latitude +","+longitude;
 
+        if(isNetworkAvailable()){
+
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder().url(forecastURl).build();
@@ -60,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        }
 
         Log.d(TAG, "Main Code is Running");
 
@@ -67,6 +74,21 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+        boolean isAvailable = false;
+
+        if(networkInfo != null && networkInfo.isConnected()){
+            isAvailable = true;
+        }else
+        {
+            Toast.makeText(this, R.string.NetNot, Toast.LENGTH_LONG).show();
+        }
+
+        return isAvailable;
     }
 
     private void alertUserAboutError() {
