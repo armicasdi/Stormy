@@ -11,6 +11,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -21,9 +23,13 @@ import okhttp3.Request;
 import okhttp3.Request.Builder;
 import okhttp3.Response;
 
+
+
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getSimpleName();
+
+    private CurrentWeather currentWeather;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +58,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 try {
-                    Log.v(TAG, response.body().string());
+
+                    String jsonData = response.body().string();
+                    Log.v(TAG, jsonData);
 
                     if(response.isSuccessful()){
+                        currentWeather = getCurrentDetails(jsonData);
 
                     }else{
                         alertUserAboutError();
@@ -63,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                     Log.e(TAG, "IO Exception caight", e);
+                }catch (JSONException e){
+                    Log.e(TAG, "JSON Exception", e);
                 }
             }
         });
@@ -74,6 +85,15 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private CurrentWeather getCurrentDetails(String jsonData) throws JSONException {
+
+        JSONObject forecast = new JSONObject(jsonData);
+
+        String timezone = forecast.getString("timezone");
+        Log.i(TAG, "from Json " + timezone);
+        return null;
     }
 
     private boolean isNetworkAvailable() {
