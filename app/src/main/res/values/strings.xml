@@ -4,4 +4,6 @@
     <string name="error_message">There was an error, please try again</string>
     <string name="error_button_ok_text">Ok</string>
     <string name="NetNot">Sorry Network Unavailable</string>
+
+    <string name="dark_sky_message"><a href="https://darksky.net/poweredby">Powered By Dark Sky</a></string>
 </resources>
