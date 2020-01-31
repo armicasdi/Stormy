@@ -1,6 +1,5 @@
 package com.example.stormy;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
@@ -16,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.stormy.Weather.CurrentWeather;
 import com.example.stormy.databinding.ActivityMainBinding;
 
 import org.jetbrains.annotations.NotNull;

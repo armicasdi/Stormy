@@ -6,7 +6,7 @@
     <data>
         <variable
             name ="weather"
-            type="com.example.stormy.CurrentWeather"/>
+            type="com.example.stormy.Weather.CurrentWeather"/>
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
