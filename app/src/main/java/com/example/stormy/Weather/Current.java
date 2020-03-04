@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class CurrentWeather {
+public class Current {
 
     private String location;
     private String icon;
@@ -17,10 +17,10 @@ public class CurrentWeather {
     private String summary;
     private String timeZone;
 
-    public CurrentWeather() {
+    public Current() {
     }
 
-    public CurrentWeather(String location, String icon, long time, double temperature, double humidity, double precipChance, String summary, String timeZone) {
+    public Current(String location, String icon, long time, double temperature, double humidity, double precipChance, String summary, String timeZone) {
         this.location = location;
         this.icon = icon;
         this.time = time;

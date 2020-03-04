@@ -2,7 +2,23 @@ package com.example.stormy.Weather;
 
 public class Forecast {
 
-    private CurrentWeather currentWeather;
+    public Current getCurrentWeather() {
+        return currentWeather;
+    }
+
+    public void setCurrentWeather(Current currentWeather) {
+        this.currentWeather = currentWeather;
+    }
+
+    public Hourly[] getHourlyForecast() {
+        return hourlyForecast;
+    }
+
+    public void setHourlyForecast(Hourly[] hourlyForecast) {
+        this.hourlyForecast = hourlyForecast;
+    }
+
+    private Current currentWeather;
     private Hourly[] hourlyForecast;
 
     

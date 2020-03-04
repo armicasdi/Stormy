@@ -1,6 +1,6 @@
 package com.example.stormy.Weather;
 
-public class Hourly {
+public class  Hourly {
 
     private long time;
     private String summary;

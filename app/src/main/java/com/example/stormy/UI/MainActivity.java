@@ -1,4 +1,4 @@
-package com.example.stormy;
+package com.example.stormy.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -15,7 +15,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.stormy.Weather.CurrentWeather;
+import com.example.stormy.R;
+import com.example.stormy.Weather.Current;
+import com.example.stormy.Weather.Forecast;
 import com.example.stormy.databinding.ActivityMainBinding;
 
 import org.jetbrains.annotations.NotNull;
@@ -37,7 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getSimpleName();
 
-    private CurrentWeather currentWeather;
+    private Forecast forecast;
+
+
     private ImageView iconImageView;
     final double latitude =37.8267;
     final double longitude =-122.4233;
@@ -46,13 +50,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getForecast(latitude, longitude);
-
         Log.d(TAG, "Main Code is Running");
-
-
-
-
-
     }
 
     private void getForecast(double latitude, double longitude ) {
@@ -89,9 +87,11 @@ public class MainActivity extends AppCompatActivity {
                     Log.v(TAG, jsonData);
 
                     if(response.isSuccessful()){
-                        currentWeather = getCurrentDetails(jsonData);
+                        forecast = parseForecastData(jsonData);
 
-                        final CurrentWeather displayWeather = new CurrentWeather(
+                        Current currentWeather = forecast.getCurrentWeather();
+
+                        final Current displayWeather = new Current(
                                 currentWeather.getLocation(),
                                 currentWeather.getIcon(),
                                 currentWeather.getTime(),
@@ -127,8 +127,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private Forecast parseForecastData(String jsonData) throws JSONException {
+        Forecast forecast = new Forecast();
 
-    private CurrentWeather getCurrentDetails(String jsonData) throws JSONException {
+        forecast.setCurrentWeather(getCurrentDetails(jsonData));
+        return forecast;
+    }
+
+
+    private Current getCurrentDetails(String jsonData) throws JSONException {
 
         JSONObject forecast = new JSONObject(jsonData);
 
@@ -136,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "from Json " + timezone);
 
         JSONObject currently = forecast.getJSONObject("currently");
-        CurrentWeather currentWeather = new CurrentWeather();
+        Current currentWeather = new Current();
 
         currentWeather.setHumidity(currently.getDouble("humidity"));
         currentWeather.setTime(currently.getLong("time"));
