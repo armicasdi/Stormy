@@ -1,4 +1,4 @@
-package com.example.stormy.UI;
+package com.example.stormy.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -16,8 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.stormy.R;
-import com.example.stormy.Weather.Current;
-import com.example.stormy.Weather.Forecast;
+import com.example.stormy.weather.Current;
+import com.example.stormy.weather.Forecast;
+
 import com.example.stormy.databinding.ActivityMainBinding;
 
 import org.jetbrains.annotations.NotNull;
@@ -38,10 +39,7 @@ import okhttp3.Response;
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getSimpleName();
-
     private Forecast forecast;
-
-
     private ImageView iconImageView;
     final double latitude =37.8267;
     final double longitude =-122.4233;
@@ -118,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
 
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Log.e(TAG, "IO Exception caight", e);
+                    Log.e(TAG, "IO Exception caught", e);
                 }catch (JSONException e){
                     Log.e(TAG, "JSON Exception", e);
                 }

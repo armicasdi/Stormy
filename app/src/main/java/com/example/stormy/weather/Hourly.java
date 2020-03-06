@@ -1,4 +1,4 @@
-package com.example.stormy.Weather;
+package com.example.stormy.weather;
 
 public class  Hourly {
 

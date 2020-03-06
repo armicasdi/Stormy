@@ -1,4 +1,4 @@
-package com.example.stormy.UI;
+package com.example.stormy.ui;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
