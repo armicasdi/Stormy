@@ -160,5 +160,20 @@
         android:onClick="refreshOnClick"
         app:srcCompat="@drawable/refresh" />
 
+    <Button
+        android:id="@+id/hourlyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:background="#40fffffff"
+        android:text="Hourly Forecast"
+        android:textColor="@android:color/white"
+        android:onClick="hourlyOnClick"
+        app:layout_constraintBottom_toTopOf="@+id/darkSkyAttribution"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/summaryValue" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

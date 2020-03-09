@@ -2,6 +2,9 @@ package com.example.stormy.weather;
 
 public class Forecast {
 
+    private Current currentWeather;
+    private Hour[] hourForecast;
+
     public Current getCurrentWeather() {
         return currentWeather;
     }
@@ -10,16 +13,13 @@ public class Forecast {
         this.currentWeather = currentWeather;
     }
 
-    public Hourly[] getHourlyForecast() {
-        return hourlyForecast;
+    public Hour[] getHourForecast() {
+        return hourForecast;
     }
 
-    public void setHourlyForecast(Hourly[] hourlyForecast) {
-        this.hourlyForecast = hourlyForecast;
+    public void setHourForecast(Hour[] hourForecast) {
+        this.hourForecast = hourForecast;
     }
-
-    private Current currentWeather;
-    private Hourly[] hourlyForecast;
 
     
 

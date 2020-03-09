@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -20,8 +21,10 @@ import com.example.stormy.weather.Current;
 import com.example.stormy.weather.Forecast;
 
 import com.example.stormy.databinding.ActivityMainBinding;
+import com.example.stormy.weather.Hour;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -39,6 +42,7 @@ import okhttp3.Response;
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getSimpleName();
+
     private Forecast forecast;
     private ImageView iconImageView;
     final double latitude =37.8267;
@@ -56,9 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView darkSky = findViewById(R.id.darkSkyAttribution);
         darkSky.setMovementMethod(LinkMovementMethod.getInstance());
-
         iconImageView = findViewById(R.id.iconImageView);
-
         String apiKey ="8c798ae8a862d546577abf4f0df5557f";
 
 
@@ -129,7 +131,34 @@ public class MainActivity extends AppCompatActivity {
         Forecast forecast = new Forecast();
 
         forecast.setCurrentWeather(getCurrentDetails(jsonData));
+        forecast.setHourForecast(getHourlyForecast(jsonData));
         return forecast;
+    }
+
+
+    private Hour[] getHourlyForecast(String jsonData) throws JSONException {
+        JSONObject forecast = new JSONObject(jsonData);
+
+        String timezone = forecast.getString("timezone");
+        JSONObject hourly = forecast.getJSONObject("hourly");
+        JSONArray data = hourly.getJSONArray("data");
+        Hour[] hours = new Hour[data.length()];
+
+        for (int i= 0; i< data.length(); i++){
+            JSONObject jsonHour = data.getJSONObject(i);
+
+            Hour hour = new Hour();
+
+            hour.setSummary(jsonHour.getString("summary"));
+            hour.setIcon(jsonHour.getString("icon"));
+            hour.setTemperature(jsonHour.getDouble("temperature"));
+            hour.setTime(jsonHour.getLong("time"));
+            //hour.setTimezone(jsonHour.getString("timezone"));
+
+            hours[i] = hour;
+
+        }
+        return hours;
     }
 
 
@@ -182,5 +211,11 @@ public class MainActivity extends AppCompatActivity {
         getForecast(latitude, longitude);
         Toast.makeText(this, "Data Refreshed", Toast.LENGTH_LONG).show();
 
+    }
+
+    public void hourlyOnClick(View view) {
+
+        Intent intent = new Intent(this, HourlyForecastActivity.class);
+        startActivity(intent);
     }
 }
