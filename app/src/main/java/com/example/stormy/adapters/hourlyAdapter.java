@@ -8,7 +8,9 @@ import android.widget.BaseAdapter;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class hourlyAdapter extends RecyclerView.Adapter<HourlyAdapter.ViewHolder> {
+import com.example.stormy.databinding.HourlyListItemBinding;
+
+public class hourlyAdapter extends RecyclerView.Adapter<HourlyAdapter.ViewHolder>{
 
 
     @NonNull
@@ -28,10 +30,16 @@ public class hourlyAdapter extends RecyclerView.Adapter<HourlyAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
+        //Bindign
 
-        //Binding Variables
+        public HourlyListItemBinding hourlyListItemBinding;
 
-        ///Construictors
+        //Constructor
+
+        public ViewHolder(HourlyListItemBinding hourlyLayoutBinding){
+            super(hourlyLayoutBinding.getRoot());
+            hourlyListItemBinding = hourlyLayoutBinding;
+        }
 
     }
 }
